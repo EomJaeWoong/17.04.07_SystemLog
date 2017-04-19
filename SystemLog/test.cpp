@@ -2,22 +2,16 @@
 
 #include "stdafx.h"
 
-CSystemLog *CSystemLog::_pSystemLog = NULL;
-__int64 CSystemLog::_iLogCnt = 0;
-char CSystemLog::_byLogMode = CONSOLE;
-char CSystemLog::_wLogBuffer[256] = { 0, };
-
-CSystemLog *SystemLog = CSystemLog::GetInstance();
-
 int _tmain(int argc, _TCHAR* argv[])
 {
+	LOG_SET(LOG::FILE | LOG::CONSOLE, LOG::LEVEL_DEBUG);
+
 	for (int iCnt = 0; iCnt < 100; iCnt++)
 	{
-		LOG("Battle", LEVEL_ERROR, "adsflkdsfajlkdsf");
-		LOG("Battle", LEVEL_DEBUG, "asdfadsf");
-		//Sleep(rand() % 2000);
+		LOG(L"Battle", LOG::LEVEL_DEBUG, L"%d %s", iCnt, L"debug");
+		LOG(L"Battle", LOG::LEVEL_WARNING, L"%d %s", iCnt, L"warning");
+		LOG(L"Battle", LOG::LEVEL_ERROR, L"%d %s", iCnt, L"error");
 	}
-
 	return 0;
 }
 
